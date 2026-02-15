@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  s3-sync:
+    build: .
+    container_name: s3-sync
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - S3_BUCKET=${S3_BUCKET}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION}
+    volumes:
+      - ${DIR_DOWNLOADS}:/data/Downloads
+      - ${DIR_DOCUMENTS}:/data/Documents
+      - ${DIR_DESKTOP}:/data/Desktop
+      - ${DIR_INTERVIEW_PREPARATION}:/data/Interview_Preparation
+      - ${DIR_PROJECTS}:/data/Projects
